@@ -7,6 +7,8 @@ piccolo progetto in flutter per l'INQUADRATURA di oggetti 3D.
 
 comandi utili:
 
-flutter clean
-flutter pub get
-flutter run -d chrome
+- flutter clean
+- flutter pub get
+- flutter run -d chrome
+
+[clean.zip](https://github.com/user-attachments/files/21379788/clean.zip)
