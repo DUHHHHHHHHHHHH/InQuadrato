@@ -46,7 +46,8 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
         peso: 4500,
         categoria: "Personaggio",
         materiale: "Poligoni 3D",
-        descrizione: "Protagonista silenzioso rivoluzionario di Deltarune.",
+        descrizione:
+            "Kris Dreemurr è un Lightner umano e il protagonista principale di Deltarune. È presumibilmente l'Eroe umano della Luce nella Profezia. In un Mondo Oscuro, funge da leader del gruppo. Kris è controllato dal giocatore per la maggior parte del gioco. Le poche eccezioni sono rappresentate da brevi cutscene o da quando si strappa l'ANIMA dal corpo.",
         source:
             "https://sketchfab.com/3d-models/kris-lightner-form-deltarune-fb0ce072a0c7413cac526834cb31189b",
         anteprima: "deltarune/kris/preview.jpeg",
@@ -58,7 +59,8 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
         peso: 5200,
         categoria: "Personaggio",
         materiale: "Poligoni 3D",
-        descrizione: "Compagna d'avventura combattiva e volitiva.",
+        descrizione:
+            "Susie è una Lightner di Hometown e uno dei deuteragonisti di Deltarune. È il mostro Eroe della Luce della Leggenda di Deltarune. Impugna un'ascia mentre si trova in un Mondo Oscuro. Grazie ai suoi alti HP e all'attacco, svolge il ruolo di tank e di demolitore del gruppo durante gli incontri.",
         source:
             "https://sketchfab.com/3d-models/susie-lightner-form-deltarune-624afc3bae8043d1832698f0f8f0f9b5",
         anteprima: "deltarune/susie/preview.jpeg",
@@ -70,7 +72,8 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
         peso: 4100,
         categoria: "Personaggio",
         materiale: "Poligoni 3D",
-        descrizione: "Guaritore gentile e guida del gruppo.",
+        descrizione:
+            "Ralsei è un Darkner e uno dei deuteragonisti (insieme a Susie) di Deltarune. Sostiene di essere il “Principe dell'Oscurità”, menzionato nella Profezia. Con un attacco più debole e una salute massima inferiore, ma con la capacità di lanciare incantesimi di guarigione, Ralsei funge da guaritore del gruppo. In combattimento brandisce una sciarpa.",
         source:
             "https://sketchfab.com/3d-models/ralsei-deltarune-70e432c910044487ba9c717b176116a6",
         anteprima: "deltarune/ralsei/preview.jpeg",
