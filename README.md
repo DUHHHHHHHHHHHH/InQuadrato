@@ -1,6 +1,14 @@
-# inquadrato
-
-piccolo progetto in **flutter** per l'INQUADRATURA di oggetti 3D. E' possibile importare file di tipo `.fbx`, `.glb` e `.obj`
+<table>
+  <tr>
+    <td>
+      <img width="800" height="800" alt="800x800" src="https://github.com/user-attachments/assets/24ac6a82-4112-475a-9d0b-d4611ddbcf06"  alt="InQuadrato" width="150px" />
+    </td>
+    <td align="center">
+      <h1>InQuadrato</h1> 
+      <p > piccolo progetto in **flutter** per l'INQUADRATURA di oggetti 3D. E' possibile importare file di tipo `.fbx`, `.glb` e `.obj` </p>
+    </td>
+  </tr>
+</table>
 
 ---
 
