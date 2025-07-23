@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_cube/flutter_cube.dart';
 // import 'dart:math';
 // import 'package:vector_math/vector_math_64.dart' as vmath;
-import '../models/ClasseModello.dart';
+import '../models/classemodello.dart';
 
 class ViewOggettoWidget extends StatefulWidget {
   final Oggetto3D oggetto;

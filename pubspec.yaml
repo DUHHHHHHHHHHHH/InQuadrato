@@ -23,12 +23,16 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/deltarune/flowey/flowey.glb
-    - assets/deltarune/kris/kris.glb
-    - assets/deltarune/ralsei/ralsei.glb
-    - assets/deltarune/susie/susie.glb
+    - assets/
 
-    - assets/deltarune/flowey/preview.jpeg
+    - assets/deltarune/kris/kris.glb
     - assets/deltarune/kris/preview.jpeg
+
+    - assets/deltarune/ralsei/ralsei.glb
     - assets/deltarune/ralsei/preview.jpeg
+
+    - assets/deltarune/susie/susie.glb
     - assets/deltarune/susie/preview.jpeg
+
+    - assets/deltarune/flowey/flowey.glb
+    - assets/deltarune/flowey/preview.jpeg

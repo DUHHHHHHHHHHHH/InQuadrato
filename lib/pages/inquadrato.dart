@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import '../models/ClasseModello.dart';
+import 'package:flutter/foundation.dart'; // <--- AGGIUNTO
+import '../models/classemodello.dart';
 import '../services/file.dart';
 import '../widgets/widget-inquadra-oggetto.dart';
 import '../widgets/widget-selezione.dart';
@@ -22,18 +23,20 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
   }
 
   Future<void> caricaOggetti() async {
-    final importFiles = await FileService.listaModelliImportati();
-
-    final importati = importFiles
-        .map(
-          (f) => Oggetto3D(
-            nome: f.uri.pathSegments.last,
-            peso: f.lengthSync() / 1024, // peso in KB
-            categoria: 'Importato',
-            path: f.path,
-          ),
-        )
-        .toList();
+    List<Oggetto3D> importati = [];
+    if (!kIsWeb) {
+      final importFiles = await FileService.listaModelliImportati();
+      importati = importFiles
+          .map(
+            (f) => Oggetto3D(
+              nome: f.uri.pathSegments.last,
+              peso: f.lengthSync() / 1024, // peso in KB
+              categoria: 'Importato',
+              path: f.path,
+            ),
+          )
+          .toList();
+    }
 
     // Lista personaggi Deltarune (sostituisce demo macchine)
     final listaDeltarune = [
@@ -43,9 +46,10 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
         categoria: "Personaggio",
         materiale: "Poligoni 3D",
         descrizione: "Protagonista silenzioso rivoluzionario di Deltarune.",
-        source: "https://deltarune.com",
-        anteprima: "assets/deltarune/modello1/preview.jpeg",
-        path: "assets/deltarune/modello1/model.glb",
+        source:
+            "https://sketchfab.com/3d-models/kris-lightner-form-deltarune-fb0ce072a0c7413cac526834cb31189b",
+        anteprima: "assets/deltarune/kris/preview.jpeg",
+        path: "assets/deltarune/kris/kris.glb",
         attributiExtra: {"ruolo": "Protagonista", "coloreVestito": "Verde"},
       ),
       Oggetto3D(
@@ -54,9 +58,10 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
         categoria: "Personaggio",
         materiale: "Poligoni 3D",
         descrizione: "Compagna d'avventura combattiva e volitiva.",
-        source: "https://deltarune.com",
-        anteprima: "assets/deltarune/modello2/preview.jpeg",
-        path: "assets/deltarune/modello2/model.glb",
+        source:
+            "https://sketchfab.com/3d-models/susie-lightner-form-deltarune-624afc3bae8043d1832698f0f8f0f9b5",
+        anteprima: "assets/deltarune/susie/preview.jpeg",
+        path: "assets/deltarune/susie/susie.glb",
         attributiExtra: {"coloreCapelli": "Viola scuro", "ruolo": "Alleata"},
       ),
       Oggetto3D(
@@ -65,49 +70,17 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
         categoria: "Personaggio",
         materiale: "Poligoni 3D",
         descrizione: "Guaritore gentile e guida del gruppo.",
-        source: "https://deltarune.com",
-        anteprima: "assets/deltarune/modello3/preview.jpeg",
-        path: "assets/deltarune/modello3/model.glb",
+        source:
+            "https://sketchfab.com/3d-models/ralsei-deltarune-70e432c910044487ba9c717b176116a6",
+        anteprima: "assets/deltarune/ralsei/preview.jpeg",
+        path: "assets/deltarune/ralsei/ralsei.glb",
         attributiExtra: {"coloreMantello": "Verde", "ruolo": "Guaritore"},
-      ),
-      Oggetto3D(
-        nome: "Noelle",
-        peso: 3900,
-        categoria: "Personaggio",
-        materiale: "Poligoni 3D",
-        descrizione: "Amica di Kris e Susie con poteri di ghiaccio.",
-        source: "https://deltarune.com",
-        anteprima: "assets/deltarune/modello4/preview.jpeg",
-        path: "assets/deltarune/modello4/model.glb",
-        attributiExtra: {"coloreCapelli": "Biondo", "ruolo": "Alleata"},
-      ),
-      Oggetto3D(
-        nome: "Spamton",
-        peso: 3600,
-        categoria: "Personaggio",
-        materiale: "Poligoni 3D",
-        descrizione: "Miniboss e venditore ambiguo.",
-        source: "https://deltarune.com",
-        anteprima: "assets/deltarune/modello5/preview.jpeg",
-        path: "assets/deltarune/modello5/model.glb",
-        attributiExtra: {"ruolo": "Antagonista Minore"},
-      ),
-      Oggetto3D(
-        nome: "Jevil",
-        peso: 4800,
-        categoria: "Personaggio",
-        materiale: "Poligoni 3D",
-        descrizione: "Boss opzionale e folle giullare.",
-        source: "https://deltarune.com",
-        anteprima: "assets/deltarune/modello6/preview.jpeg",
-        path: "assets/deltarune/modello6/model.glb",
-        attributiExtra: {"ruolo": "Boss"},
       ),
     ];
 
     setState(() {
       listaOggetti = [...listaDeltarune, ...importati];
-
+      print('Oggetti caricati: ${listaOggetti.length}');
       if (listaOggetti.isNotEmpty) {
         oggettoSelezionato = listaOggetti[0];
       }

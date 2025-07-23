@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import '../models/ClasseModello.dart';
+import '../models/classemodello.dart';
 import 'dart:io';
 
 class SelezioneWidget extends StatelessWidget {
