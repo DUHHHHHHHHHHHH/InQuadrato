@@ -24,6 +24,7 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
   }
 
   Future<void> caricaOggetti() async {
+    // TODO: gestire gli import esterni. Assets interni funzionano.
     List<Oggetto3D> importati = [];
     if (!kIsWeb) {
       final importFiles = await FileService.listaModelliImportati();
