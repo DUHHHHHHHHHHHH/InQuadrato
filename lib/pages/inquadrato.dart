@@ -5,6 +5,7 @@ import '../services/file.dart';
 import '../widgets/widget-inquadra-oggetto.dart';
 import '../widgets/widget-selezione.dart';
 import '../utils/path_utils.dart';
+import '../forms/import.dart'; // <--- importa il nuovo dialog
 
 class VisualizzatorePage extends StatefulWidget {
   const VisualizzatorePage({super.key});
@@ -99,12 +100,36 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
     });
   }
 
+  void _apriDialogImport() async {
+    final nuovoOggetto = await showDialog<Oggetto3D>(
+      context: context,
+      builder: (context) => ImportFormDialog(),
+    );
+    if (nuovoOggetto != null) {
+      setState(() {
+        listaOggetti.add(nuovoOggetto);
+        oggettoSelezionato = nuovoOggetto;
+      });
+
+      // Qui puoi aggiungere il salvataggio su disco o database
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
 
     return Scaffold(
-      appBar: AppBar(title: const Text("InQuadrato!")),
+      appBar: AppBar(
+        title: const Text("InQuadrato!"),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.add),
+            tooltip: 'Importa nuovo modello',
+            onPressed: _apriDialogImport,
+          ),
+        ],
+      ),
       body: Row(
         children: [
           Container(
