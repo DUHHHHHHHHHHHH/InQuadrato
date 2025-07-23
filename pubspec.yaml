@@ -37,6 +37,8 @@ flutter:
     - assets/deltarune/susie/susie.glb
     - assets/deltarune/ralsei/preview.jpeg
     - assets/deltarune/ralsei/ralsei.glb
+    - assets/deltarune/flowey/preview.jpeg
+    - assets/deltarune/flowey/flowey.glb
 
   fonts:
     - family: "Bitcount Single"

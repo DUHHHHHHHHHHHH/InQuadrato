@@ -81,6 +81,19 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
         path: "deltarune/ralsei/ralsei.glb",
         attributiExtra: {"coloreMantello": "Verde", "ruolo": "Guaritore"},
       ),
+      Oggetto3D(
+        nome: "Flowey",
+        peso: 63,
+        categoria: "Personaggio",
+        materiale: "Poligoni 3D",
+        descrizione:
+            "Flowey è un Darkner e il principale antagonista di Deltarune. È un Darkner che si comporta come un Lightner, ma non ha un corpo fisico. Si presenta come un fiore con faccia e petali, e può trasformarsi in una forma più grande durante gli scontri.",
+        source:
+            "https://sketchfab.com/3d-models/flowey-undertale-d8d517c5842e4c0cab8e68a4e9c64541",
+        anteprima: "deltarune/flowey/preview.jpeg",
+        path: "deltarune/flowey/flowey.glb",
+        attributiExtra: {"colorePetali": "Giallo", "ruolo": "Antagonista"},
+      ),
     ];
 
     final listaCorretta = correggiPercorsi([...listaDeltarune, ...importati]);
