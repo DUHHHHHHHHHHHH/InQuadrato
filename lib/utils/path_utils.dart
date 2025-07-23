@@ -1,13 +1,14 @@
 import 'package:flutter/foundation.dart';
 import '../models/classemodello.dart';
 
-/// Corregge i path asset su Flutter Web per il problema del doppio folder 'assets/assets'.
+// questo file l'ho fatto per correggere i percorsi degli asset, per qualche motivo
+// assets mi si duplica senza motivo.
+
 String fixAssetPath(String originalPath) {
   if (!kIsWeb) return originalPath;
 
   if (!originalPath.startsWith('assets/')) return originalPath;
 
-  // Se il path non inizia già con assets/assets, aggiunge un prefix assets/
   if (!originalPath.startsWith('assets/assets/')) {
     return 'assets/' + originalPath;
   }

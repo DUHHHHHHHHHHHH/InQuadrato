@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'pages/inquadrato.dart';
+import 'pages/login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'INQUADRATO',
       debugShowCheckedModeBanner: false,
-      home: const VisualizzatorePage(),
+      home: const FakeLoginPage(),
     );
   }
 }

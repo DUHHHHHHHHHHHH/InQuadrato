@@ -16,7 +16,7 @@ class ModelRotationSlider extends StatelessWidget {
       value: currentRotation,
       min: 0,
       max: 360,
-      divisions: 360, // Per un controllo più fine
+      divisions: 360,
       label: currentRotation.round().toString(),
       onChanged: onChanged,
     );

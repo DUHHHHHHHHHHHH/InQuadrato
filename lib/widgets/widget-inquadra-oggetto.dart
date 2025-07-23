@@ -8,11 +8,9 @@ import 'dart:typed_data';
 import 'package:flutter/foundation.dart' show kIsWeb;
 import 'dart:html' as html;
 
-// Importa i tuoi modelli e utility
 import '../models/classemodello.dart';
-import '../utils/path_utils.dart'; // Assicurati che fixAssetPath sia qui
+import '../utils/path_utils.dart';
 
-// Importa i nuovi widget
 import 'model_rotation_slider.dart';
 import 'model_control_bar.dart';
 import 'model_viewer_display.dart';
@@ -102,7 +100,6 @@ class _ViewOggettoWidgetState extends State<ViewOggettoWidget> {
     }
   }
 
-  // Placeholder per i filtri (potresti volerli implementare qui o in un altro file)
   void _applyOriginalFilter() {
     ScaffoldMessenger.of(context).showSnackBar(
       const SnackBar(content: Text('Filtro "Originale" (non implementato)')),
@@ -130,7 +127,6 @@ class _ViewOggettoWidgetState extends State<ViewOggettoWidget> {
 
     return Column(
       children: [
-        // Slider per la rotazione
         ModelRotationSlider(
           currentRotation: _horizontalRotation,
           onChanged: (value) {
@@ -140,7 +136,6 @@ class _ViewOggettoWidgetState extends State<ViewOggettoWidget> {
           },
         ),
 
-        // Barra dei controlli (filtri e screenshot)
         ModelControlBar(
           onOriginalFilter: _applyOriginalFilter,
           onPixelArtFilter: _applyPixelArtFilter,
@@ -148,7 +143,6 @@ class _ViewOggettoWidgetState extends State<ViewOggettoWidget> {
           onScreenshot: _takeScreenshot,
         ),
 
-        // Visualizzatore del modello 3D
         Expanded(
           flex: 7,
           child: ModelViewerDisplay(
@@ -161,7 +155,6 @@ class _ViewOggettoWidgetState extends State<ViewOggettoWidget> {
           ),
         ),
 
-        // Dettagli dell'oggetto
         Expanded(flex: 3, child: OggettoDetailsCard(oggetto: widget.oggetto)),
       ],
     );

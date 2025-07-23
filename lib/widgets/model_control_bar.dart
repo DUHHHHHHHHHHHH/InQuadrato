@@ -31,7 +31,9 @@ class ModelControlBar extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: onGrayscaleFilter,
-            child: const Text('B/N'),
+            child: const Text(
+              'B/N',
+            ), // BIANCO E NERO (alcune volte mi scordo cosa significa)
           ),
           IconButton(
             icon: const Icon(Icons.camera_alt),
