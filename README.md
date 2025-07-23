@@ -19,5 +19,3 @@ comandi utili:
 - flutter clean
 - flutter pub get
 - flutter run -d chrome
-
-[clean.zip](https://github.com/user-attachments/files/21379788/clean.zip)
