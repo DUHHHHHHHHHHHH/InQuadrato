@@ -10,7 +10,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: '!! INQUADRATO !!',
+      title: 'INQUADRATO',
       debugShowCheckedModeBanner: false,
       home: const VisualizzatorePage(),
     );

@@ -13,6 +13,11 @@ dependencies:
   cupertino_icons: ^1.0.8
   flutter_cube: ^0.1.1
   path_provider: ^2.1.5
+  model_viewer_plus: ^1.9.3
+
+  screenshot: ^3.0.0
+  image_gallery_saver: ^2.0.3
+  permission_handler: ^11.0.1
 
 dev_dependencies:
   flutter_test:
@@ -23,16 +28,9 @@ flutter:
   uses-material-design: true
 
   assets:
-    - assets/
-
-    - assets/deltarune/kris/kris.glb
     - assets/deltarune/kris/preview.jpeg
-
-    - assets/deltarune/ralsei/ralsei.glb
-    - assets/deltarune/ralsei/preview.jpeg
-
-    - assets/deltarune/susie/susie.glb
+    - assets/deltarune/kris/kris.glb
     - assets/deltarune/susie/preview.jpeg
-
-    - assets/deltarune/flowey/flowey.glb
-    - assets/deltarune/flowey/preview.jpeg
+    - assets/deltarune/susie/susie.glb
+    - assets/deltarune/ralsei/preview.jpeg
+    - assets/deltarune/ralsei/ralsei.glb

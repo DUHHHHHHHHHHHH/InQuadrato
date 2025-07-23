@@ -2,15 +2,13 @@ import 'dart:io';
 import 'package:path_provider/path_provider.dart';
 
 class FileService {
-  /// Ottiene o crea la cartella Documents/Inquadra3D/import
   static Future<Directory> getImportDirectory() async {
-    final Directory documentsDir = await getApplicationDocumentsDirectory();
-
-    final Directory importDir = Directory(
+    final documentsDir = await getApplicationDocumentsDirectory();
+    final importDir = Directory(
       '${documentsDir.path}${Platform.pathSeparator}Inquadra3D${Platform.pathSeparator}import',
     );
 
-    if (!(await importDir.exists())) {
+    if (!await importDir.exists()) {
       await importDir.create(recursive: true);
       print('Cartella import creata in: ${importDir.path}');
     } else {
@@ -20,7 +18,6 @@ class FileService {
     return importDir;
   }
 
-  /// Restituisce lista di file modelli 3D nella cartella import (ricorsiva)
   static Future<List<File>> listaModelliImportati() async {
     final dir = await getImportDirectory();
     if (!await dir.exists()) return [];

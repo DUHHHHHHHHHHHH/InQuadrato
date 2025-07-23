@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../models/classemodello.dart';
-import 'dart:io';
+import '../utils/path_utils.dart';
 
 class SelezioneWidget extends StatelessWidget {
   final List<Oggetto3D> oggetti;
@@ -24,23 +24,12 @@ class SelezioneWidget extends StatelessWidget {
 
         Widget anteprimaWidget;
         if (obj.anteprima != null && obj.anteprima!.isNotEmpty) {
-          if (obj.anteprima!.startsWith('assets/')) {
-            // Asset image
-            anteprimaWidget = Image.asset(
-              obj.anteprima!,
-              width: 40,
-              height: 40,
-              fit: BoxFit.cover,
-            );
-          } else {
-            // File system image
-            anteprimaWidget = Image.file(
-              File(obj.anteprima!),
-              width: 40,
-              height: 40,
-              fit: BoxFit.cover,
-            );
-          }
+          anteprimaWidget = Image.asset(
+            fixAssetPath(obj.anteprima!),
+            width: 40,
+            height: 40,
+            fit: BoxFit.cover,
+          );
         } else {
           anteprimaWidget = const Icon(Icons.image_not_supported, size: 40);
         }

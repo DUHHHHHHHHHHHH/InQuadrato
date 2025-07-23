@@ -1,12 +1,12 @@
 class Oggetto3D {
   final String nome;
-  final double peso; // del file in KB
+  final double peso; // in KB
   final String categoria;
   final String? materiale;
   final String? descrizione;
   final String? source;
   final String? anteprima;
-  final String path; // percorso file modello (asset o file system)
+  final String path;
   final Map<String, dynamic>? attributiExtra;
   final DateTime? dataCreazione;
 

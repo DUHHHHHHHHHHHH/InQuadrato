@@ -1,8 +1,22 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_cube/flutter_cube.dart';
-// import 'dart:math';
-// import 'package:vector_math/vector_math_64.dart' as vmath;
+import 'package:screenshot/screenshot.dart';
+import 'package:path_provider/path_provider.dart';
+import 'dart:io';
+import 'package:image_gallery_saver/image_gallery_saver.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'dart:typed_data';
+import 'package:flutter/foundation.dart' show kIsWeb;
+import 'dart:html' as html;
+
+// Importa i tuoi modelli e utility
 import '../models/classemodello.dart';
+import '../utils/path_utils.dart'; // Assicurati che fixAssetPath sia qui
+
+// Importa i nuovi widget
+import 'model_rotation_slider.dart';
+import 'model_control_bar.dart';
+import 'model_viewer_display.dart';
+import 'oggetto_details_card.dart';
 
 class ViewOggettoWidget extends StatefulWidget {
   final Oggetto3D oggetto;
@@ -14,92 +28,141 @@ class ViewOggettoWidget extends StatefulWidget {
 }
 
 class _ViewOggettoWidgetState extends State<ViewOggettoWidget> {
-  double rotazioneY = 0;
-  late Object object3D;
+  Key _modelViewerKey = UniqueKey();
+  double _horizontalRotation = 0.0;
+  final double _verticalAngle = 30.0;
+  final String _cameraRadius = 'auto';
+
+  final ScreenshotController screenshotController = ScreenshotController();
 
   @override
-  void initState() {
-    super.initState();
-    object3D = Object(fileName: widget.oggetto.path);
+  void didUpdateWidget(covariant ViewOggettoWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+    if (widget.oggetto != oldWidget.oggetto) {
+      setState(() {
+        _modelViewerKey = UniqueKey();
+        _horizontalRotation = 0.0;
+      });
+    }
   }
 
-  @override
-  void didUpdateWidget(ViewOggettoWidget oldWidget) {
-    super.didUpdateWidget(oldWidget);
-    if (oldWidget.oggetto.path != widget.oggetto.path) {
-      object3D = Object(fileName: widget.oggetto.path);
-      rotazioneY = 0;
-      setState(() {});
+  Future<void> _takeScreenshot() async {
+    try {
+      final image = await screenshotController.capture();
+      if (image == null) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Impossibile catturare lo screenshot.')),
+        );
+        return;
+      }
+
+      if (kIsWeb) {
+        final blob = html.Blob([image]);
+        final url = html.Url.createObjectUrlFromBlob(blob);
+        final anchor = html.AnchorElement(href: url)
+          ..setAttribute(
+            'download',
+            'modello_${DateTime.now().millisecondsSinceEpoch}.png',
+          )
+          ..click();
+        html.Url.revokeObjectUrl(url);
+
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(content: Text('Screenshot pronto per il download!')),
+        );
+      } else {
+        var status = await Permission.storage.request();
+        if (status.isGranted) {
+          final directory = await getTemporaryDirectory();
+          final imagePath =
+              '${directory.path}/screenshot_${DateTime.now().millisecondsSinceEpoch}.png';
+          final File file = File(imagePath);
+          await file.writeAsBytes(image);
+
+          final result = await ImageGallerySaver.saveFile(file.path);
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(content: Text('Screenshot salvato nella galleria!')),
+          );
+          print('Screenshot salvato: $result');
+        } else {
+          ScaffoldMessenger.of(context).showSnackBar(
+            const SnackBar(
+              content: Text(
+                'Permesso di archiviazione negato. Non è possibile salvare lo screenshot.',
+              ),
+            ),
+          );
+        }
+      }
+    } catch (e) {
+      print('Errore durante lo screenshot: $e');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(content: Text('Errore durante lo screenshot: $e')),
+      );
     }
+  }
+
+  // Placeholder per i filtri (potresti volerli implementare qui o in un altro file)
+  void _applyOriginalFilter() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Filtro "Originale" (non implementato)')),
+    );
+  }
+
+  void _applyPixelArtFilter() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(content: Text('Filtro "Pixel Art" (non implementato)')),
+    );
+  }
+
+  void _applyGrayscaleFilter() {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Filtro "Bianco e Nero" (non implementato)'),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
+    final String modelSrc = fixAssetPath('assets/${widget.oggetto.path}');
+    final double thetaRadians = _horizontalRotation * (3.1415926535 / 180);
+
     return Column(
       children: [
+        // Slider per la rotazione
+        ModelRotationSlider(
+          currentRotation: _horizontalRotation,
+          onChanged: (value) {
+            setState(() {
+              _horizontalRotation = value;
+            });
+          },
+        ),
+
+        // Barra dei controlli (filtri e screenshot)
+        ModelControlBar(
+          onOriginalFilter: _applyOriginalFilter,
+          onPixelArtFilter: _applyPixelArtFilter,
+          onGrayscaleFilter: _applyGrayscaleFilter,
+          onScreenshot: _takeScreenshot,
+        ),
+
+        // Visualizzatore del modello 3D
         Expanded(
           flex: 7,
-          child: Container(
-            color: Colors.black12,
-            padding: const EdgeInsets.all(8),
-            child: Cube(
-              interactive: false,
-              onSceneCreated: (Scene scene) {
-                scene.world.add(object3D);
-                scene.camera.zoom = 10;
-                object3D.rotation.setValues(0, rotazioneY, 0);
-              },
-            ),
+          child: ModelViewerDisplay(
+            modelViewerKey: _modelViewerKey,
+            modelSrc: modelSrc,
+            modelAlt: widget.oggetto.nome,
+            cameraOrbit:
+                '${thetaRadians}rad ${_verticalAngle}deg ${_cameraRadius}',
+            screenshotController: screenshotController,
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 16),
-          child: Slider(
-            min: 0,
-            max: 360,
-            value: rotazioneY,
-            onChanged: (val) {
-              setState(() {
-                rotazioneY = val;
-                object3D.rotation.setValues(0, rotazioneY, 0);
-              });
-            },
-          ),
-        ),
-        Expanded(
-          flex: 3,
-          child: SingleChildScrollView(
-            padding: const EdgeInsets.all(12),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  "Nome: ${widget.oggetto.nome}",
-                  style: const TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
-                const SizedBox(height: 6),
-                Text("Peso: ${widget.oggetto.peso.toStringAsFixed(2)} KB"),
-                Text("Categoria: ${widget.oggetto.categoria}"),
-                if (widget.oggetto.materiale != null)
-                  Text("Materiale: ${widget.oggetto.materiale}"),
-                if (widget.oggetto.descrizione != null)
-                  Padding(
-                    padding: const EdgeInsets.only(top: 8.0),
-                    child: Text("Descrizione:\n${widget.oggetto.descrizione}"),
-                  ),
-                if (widget.oggetto.source != null)
-                  Text("Origine: ${widget.oggetto.source}"),
-                if (widget.oggetto.dataCreazione != null)
-                  Text(
-                    "Data di creazione: ${widget.oggetto.dataCreazione!.toLocal().toString().split(' ')[0]}",
-                  ),
-              ],
-            ),
-          ),
-        ),
+
+        // Dettagli dell'oggetto
+        Expanded(flex: 3, child: OggettoDetailsCard(oggetto: widget.oggetto)),
       ],
     );
   }
