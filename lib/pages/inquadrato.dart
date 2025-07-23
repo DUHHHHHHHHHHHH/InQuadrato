@@ -44,7 +44,7 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
     final listaDeltarune = [
       Oggetto3D(
         nome: "Kris",
-        peso: 4500,
+        peso: 137,
         categoria: "Personaggio",
         materiale: "Poligoni 3D",
         descrizione:
@@ -57,7 +57,7 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
       ),
       Oggetto3D(
         nome: "Susie",
-        peso: 5200,
+        peso: 207,
         categoria: "Personaggio",
         materiale: "Poligoni 3D",
         descrizione:
@@ -70,7 +70,7 @@ class _VisualizzatorePageState extends State<VisualizzatorePage> {
       ),
       Oggetto3D(
         nome: "Ralsei",
-        peso: 4100,
+        peso: 176,
         categoria: "Personaggio",
         materiale: "Poligoni 3D",
         descrizione:
