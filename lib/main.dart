@@ -7,11 +7,13 @@ void main() {
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'INQUADRATO',
       debugShowCheckedModeBanner: false,
+      theme: ThemeData(fontFamily: 'Bitcount Single'),
       home: const FakeLoginPage(),
     );
   }
