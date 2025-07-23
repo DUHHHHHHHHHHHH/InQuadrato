@@ -17,10 +17,6 @@
 dopo aver superato un fake login, è possibile vedere gli oggetti 3D, selezionarli e vedere il modello sulla destra.
 sulla destra è possibile selezionare dei filtri e porter screenshottare la zona con l'avatar.
 
-<img width="1918" height="1018" alt="image" src="https://github.com/user-attachments/assets/0564deb0-a719-449c-803a-a68202d49b57" />
-<img width="1918" height="1017" alt="image" src="https://github.com/user-attachments/assets/c8d1f5a3-cda0-49c3-851d-ff9480c9b680" />
-
-
 ---
 
 comandi utili:
